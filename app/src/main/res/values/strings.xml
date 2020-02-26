@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Weather Forecast</string>
+
+    <string name="to_day">Today</string>
+    <string name="five_day">5 Days</string>
+    <string name="setting">Settings</string>
+
+    <string name="weather_location">Weather Location</string>
+    <string name="location">Location</string>
+    <string name="units">Units</string>
+
+
+
+</resources>
+
