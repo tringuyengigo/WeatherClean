@@ -10,19 +10,19 @@ import gdsvn.tringuyen.myapplication.domain.respository.WeatherRepository
 import io.reactivex.Flowable
 
 
-class GetCurrentWeatherCityUseCase(private val transformer: FlowableRxTransformer<WeatherDayEntity>,
+class GetCurrentWeatherCityUseCase(private val transformer: FlowableRxTransformer<WeatherDayEntity?>,
                                    private val repositories: WeatherRepository
-) : BaseFlowableUseCase<WeatherDayEntity>(transformer){
+) : BaseFlowableUseCase<WeatherDayEntity?>(transformer){
 
 
     companion object {
         private val TAG = "GetCurrentWeatherUseCase"
     }
-    override fun createFlowable(data: Map<String, Any>?): Flowable<WeatherDayEntity> {
+    override fun createFlowable(data: Map<String, Any>?): Flowable<WeatherDayEntity?> {
         return repositories.getCurrentWeatherCity(data?.get("city") as String)
     }
 
-    fun getWeatherByCity(city: String) : Flowable<WeatherDayEntity> {
+    fun getWeatherByCity(city: String) : Flowable<WeatherDayEntity?> {
         val data = HashMap<String, String>()
         data["city"] = city
         return single(data)

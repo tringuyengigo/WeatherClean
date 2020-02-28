@@ -2,6 +2,7 @@ package gdsvn.tringuyen.myapplication
 
 import android.app.Application
 import gdsvn.tringuyen.myapplication.BuildConfig
+import gdsvn.tringuyen.myapplication.presentation.di.*
 import org.koin.android.ext.android.startKoin
 import timber.log.Timber
 
@@ -16,13 +17,13 @@ class App : Application() {
     }
 
     private fun loadKoin() {
-//        startKoin(this,
-//                listOf(mNetworkModules,
-//                        mViewModels,
-//                        mRepositoryModules,
-//                        mUseCaseModules,
-//                        mLocalModules)
-//
-//        )
+        startKoin(this,
+                listOf(mNetworkModules,
+                        mViewModels,
+                        mRepositoryModules,
+                        mUseCaseModules,
+                        mLocalModules)
+
+        )
     }
 }

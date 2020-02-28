@@ -9,11 +9,15 @@ class WeatherRepositoryImpl(private val remote: WeatherRemoteImpl,
                             private val cacheWeatherForecast: WeatherForecastCacheImpl
 ) : WeatherRepository {
 
+//    override fun getCurrentWeatherCity(city: String): Flowable<WeatherDayEntity?> {
+//        val updateItemCurrentWeatherFlowable = remote.getCurrentWeatherByCity(city = city)
+//        return cacheWeatherCurrent.getCurrentWeatherCity().mergeWith(updateItemCurrentWeatherFlowable.doOnNext {
+//            cacheWeatherCurrent.saveCurrentWeather(it)
+//        })
+//    }
+
     override fun getCurrentWeatherCity(city: String): Flowable<WeatherDayEntity?> {
-        val updateItemCurrentWeatherFlowable = remote.getCurrentWeatherByCity(city = city)
-        return cacheWeatherCurrent.getCurrentWeatherCity().mergeWith(updateItemCurrentWeatherFlowable.doOnNext {
-            cacheWeatherCurrent.saveCurrentWeather(it)
-        })
+        return remote.getCurrentWeatherByCity(city = city).map { it }
     }
 
     override fun getCurrentWeatherCoordinates(

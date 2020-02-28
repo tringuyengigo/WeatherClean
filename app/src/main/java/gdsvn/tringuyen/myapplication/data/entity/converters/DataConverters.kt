@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken
 import gdsvn.tringuyen.myapplication.data.entity.*
 import java.lang.reflect.Type
 import java.util.*
+import java.util.Collections.emptyList
 
 
 class DataConverters {
@@ -61,7 +62,7 @@ class DataConverters {
     @TypeConverter
     fun stringToSomeObjectList(data: String?): List<String?>? {
         if (data == null) {
-            return Collections.emptyList()
+            return emptyList()
         }
         val listType: Type =
             object : TypeToken<List<String?>?>() {}.type
@@ -72,6 +73,37 @@ class DataConverters {
     fun someObjectListToString(someObjects: List<String?>?): String? {
         return Gson().toJson(someObjects)
     }
+
+    @TypeConverter
+    fun weatherToSomeObjectList(data: String?): List<Weather?>? {
+        if (data == null) {
+            return emptyList()
+        }
+        val listType: Type =
+            object : TypeToken<List<Weather?>?>() {}.type
+        return Gson().fromJson(data, listType)
+    }
+
+    @TypeConverter
+    fun weatherObjectListToString(someObjects: List<Weather?>?): String? {
+        return Gson().toJson(someObjects)
+    }
+
+    @TypeConverter
+    fun weatherDayEntityToSomeObjectList(data: String?): List<WeatherDayEntity?>? {
+        if (data == null) {
+            return emptyList()
+        }
+        val listType: Type =
+            object : TypeToken<List<WeatherDayEntity?>?>() {}.type
+        return Gson().fromJson(data, listType)
+    }
+
+    @TypeConverter
+    fun weatherDayEntityObjectListToString(someObjects: List<WeatherDayEntity?>?): String? {
+        return Gson().toJson(someObjects)
+    }
+
 }
 
 

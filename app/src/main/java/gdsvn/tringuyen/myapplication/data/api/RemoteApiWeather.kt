@@ -8,8 +8,8 @@ import retrofit2.http.Query
 
 interface RemoteApiWeather {
 
-    @GET("/weather")
-    fun getCurrentWeatherByCity(@Query("query") city: String) : Flowable<WeatherDayEntity>
+    @GET("/data/2.5/weather")
+    fun getCurrentWeatherByCity(@Query("q") city: String) : Flowable<WeatherDayEntity>
 
     @GET("/weather")
     fun getCurrentWeatherByCoordinate(@Query("lat") lat: String,

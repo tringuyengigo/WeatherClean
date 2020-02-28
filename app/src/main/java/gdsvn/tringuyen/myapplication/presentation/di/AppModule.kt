@@ -7,6 +7,7 @@ import gdsvn.tringuyen.myapplication.data.responsitory.WeatherCurrentCacheImpl
 import gdsvn.tringuyen.myapplication.data.responsitory.WeatherForecastCacheImpl
 import gdsvn.tringuyen.myapplication.data.responsitory.WeatherRemoteImpl
 import gdsvn.tringuyen.myapplication.data.responsitory.WeatherRepositoryImpl
+import gdsvn.tringuyen.myapplication.domain.respository.WeatherRepository
 import gdsvn.tringuyen.myapplication.domain.usecase.GetCurrentWeatherCityUseCase
 import gdsvn.tringuyen.myapplication.domain.usecase.GetCurrentWeatherCoordinateUseCase
 import gdsvn.tringuyen.myapplication.domain.usecase.GetWeatherForecastCityUseCase
@@ -26,7 +27,7 @@ val mRepositoryModules = module {
     single(name = "local_weather_forecast") {
         WeatherForecastCacheImpl(database = get(DATABASE))
     }
-    single { WeatherRepositoryImpl(remote = get("remote"), cacheWeatherCurrent = get("local_weather_current"), cacheWeatherForecast = get("local_weather_forecast")) }
+    single { WeatherRepositoryImpl(remote = get("remote"), cacheWeatherCurrent = get("local_weather_current"), cacheWeatherForecast = get("local_weather_forecast")) as WeatherRepository }
 }
 
 val mUseCaseModules = module {
@@ -47,11 +48,11 @@ val mLocalModules = module {
 
 val mViewModels = module {
     viewModel {
-        CurrentWeatherViewModel(getWeatherUseCase = get("GetCurrentWeatherCityUseCase"))
+        CurrentWeatherViewModel(getCurrentWeatherCityUseCase = get("GetCurrentWeatherCityUseCase"))
     }
 }
 
-private const val BASE_URL = "https://api.openweathermap.org/data/2.5/"
+private const val BASE_URL = "https://api.openweathermap.org"
 private const val RETROFIT_INSTANCE = "Retrofit"
 private const val API = "Api"
 private const val GET_WEATHER_USECASE = "getWeatherUseCase"
