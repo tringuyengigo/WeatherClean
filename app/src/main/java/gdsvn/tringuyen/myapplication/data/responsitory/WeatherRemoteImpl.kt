@@ -12,7 +12,7 @@ class WeatherRemoteImpl constructor(private val api: RemoteApiWeather) {
         return api.getCurrentWeatherByCity(city = city)
     }
 
-    fun getCurrentWeatherByCity(lon: String, lat: String): Flowable<WeatherDayEntity> {
+    fun getCurrentWeatherByCoordinate(lon: String, lat: String): Flowable<WeatherDayEntity> {
         return api.getCurrentWeatherByCoordinate(lon = lon, lat = lat)
     }
 

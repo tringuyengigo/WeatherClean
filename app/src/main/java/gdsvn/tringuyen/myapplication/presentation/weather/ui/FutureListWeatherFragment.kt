@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import gdsvn.tringuyen.myapplication.R
+import gdsvn.tringuyen.myapplication.presentation.weather.viewmodel.CurrentWeatherViewModel
 import gdsvn.tringuyen.myapplication.presentation.weather.viewmodel.FutureListWeatherViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class FutureListWeatherFragment : Fragment() {
 
@@ -16,7 +18,7 @@ class FutureListWeatherFragment : Fragment() {
             FutureListWeatherFragment()
     }
 
-    private lateinit var viewModel: FutureListWeatherViewModel
+    private val futureListWeatherViewModel: FutureListWeatherViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,8 +29,7 @@ class FutureListWeatherFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(FutureListWeatherViewModel::class.java)
-        // TODO: Use the ViewModel
+        futureListWeatherViewModel.fetchWeatherCity("")
     }
 
 }

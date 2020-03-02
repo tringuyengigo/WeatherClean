@@ -8,11 +8,13 @@ android {
 
     defaultConfig {
         applicationId "gdsvn.tringuyen.myapplication"
-        minSdkVersion 23
+        minSdkVersion 20
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
     }
 
     buildTypes {
@@ -20,6 +22,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
 }
@@ -84,5 +90,7 @@ dependencies {
     implementation "com.google.android.material:material:1.1.0"
     //Add Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation 'com.android.support:multidex:1.0.3'
+
 
 }

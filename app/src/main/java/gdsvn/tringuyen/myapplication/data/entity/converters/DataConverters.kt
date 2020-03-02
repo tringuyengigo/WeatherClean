@@ -36,46 +36,13 @@ class DataConverters {
     fun sysStringToSys(value: String): Sys = Gson().fromJson(value, Sys::class.java)
 
     @TypeConverter
-    fun weatherDataToString(data: Weather): String = Gson().toJson(data)
-
-    @TypeConverter
-    fun weatherStringToWeather(value: String): Weather = Gson().fromJson(value, Weather::class.java)
-
-    @TypeConverter
     fun windDataToString(data: Wind): String = Gson().toJson(data)
 
     @TypeConverter
     fun windStringToWind(value: String): Wind = Gson().fromJson(value, Wind::class.java)
 
     @TypeConverter
-    fun weatherForecastDataToString(data: WeatherForecastEntity): String = Gson().toJson(data)
-
-    @TypeConverter
-    fun weatherForecastStringToWeatherForecast(value: String): WeatherForecastEntity = Gson().fromJson(value, WeatherForecastEntity::class.java)
-
-    @TypeConverter
-    fun weatherDayEntityDataToString(data: WeatherDayEntity): String = Gson().toJson(data)
-
-    @TypeConverter
-    fun weatherDayEntityStringToWeatherDayEntity(value: String): WeatherDayEntity = Gson().fromJson(value, WeatherDayEntity::class.java)
-
-    @TypeConverter
-    fun stringToSomeObjectList(data: String?): List<String?>? {
-        if (data == null) {
-            return emptyList()
-        }
-        val listType: Type =
-            object : TypeToken<List<String?>?>() {}.type
-        return Gson().fromJson(data, listType)
-    }
-
-    @TypeConverter
-    fun someObjectListToString(someObjects: List<String?>?): String? {
-        return Gson().toJson(someObjects)
-    }
-
-    @TypeConverter
-    fun weatherToSomeObjectList(data: String?): List<Weather?>? {
+    fun weatherStringToSomeObjectList(data: String?): List<Weather?>? {
         if (data == null) {
             return emptyList()
         }
@@ -90,7 +57,7 @@ class DataConverters {
     }
 
     @TypeConverter
-    fun weatherDayEntityToSomeObjectList(data: String?): List<WeatherDayEntity?>? {
+    fun weatherDayEntityStringToSomeObjectList(data: String?): List<WeatherDayEntity?>? {
         if (data == null) {
             return emptyList()
         }

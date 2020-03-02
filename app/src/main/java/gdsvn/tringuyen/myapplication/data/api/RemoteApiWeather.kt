@@ -11,11 +11,11 @@ interface RemoteApiWeather {
     @GET("/data/2.5/weather")
     fun getCurrentWeatherByCity(@Query("q") city: String) : Flowable<WeatherDayEntity>
 
-    @GET("/weather")
+    @GET("/data/2.5/weather")
     fun getCurrentWeatherByCoordinate(@Query("lat") lat: String,
                                       @Query("lon") lon: String): Flowable<WeatherDayEntity>
 
-    @GET("/forecast")
+    @GET("/data/2.5/forecast")
     fun getWeatherForecastByCity(@Query("q") city: String): Flowable<WeatherForecastEntity>
 
     @GET("/forecast")

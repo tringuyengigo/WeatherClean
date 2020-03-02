@@ -13,8 +13,11 @@ import gdsvn.tringuyen.myapplication.domain.usecase.GetCurrentWeatherCoordinateU
 import gdsvn.tringuyen.myapplication.domain.usecase.GetWeatherForecastCityUseCase
 import gdsvn.tringuyen.myapplication.domain.usecase.GetWeatherForecastCoordinateUseCase
 import gdsvn.tringuyen.myapplication.presentation.common.AsyncFlowableTransformer
+import gdsvn.tringuyen.myapplication.presentation.common.provider.UnitProviderImpl
 import gdsvn.tringuyen.myapplication.presentation.weather.viewmodel.CurrentWeatherViewModel
+import gdsvn.tringuyen.myapplication.presentation.weather.viewmodel.FutureListWeatherViewModel
 import org.koin.android.ext.koin.androidApplication
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module.module
 import org.koin.android.viewmodel.ext.koin.viewModel
 import retrofit2.Retrofit
@@ -27,7 +30,9 @@ val mRepositoryModules = module {
     single(name = "local_weather_forecast") {
         WeatherForecastCacheImpl(database = get(DATABASE))
     }
-    single { WeatherRepositoryImpl(remote = get("remote"), cacheWeatherCurrent = get("local_weather_current"), cacheWeatherForecast = get("local_weather_forecast")) as WeatherRepository }
+    single { WeatherRepositoryImpl(remote = get("remote"),
+        cacheWeatherCurrent = get("local_weather_current"),
+        cacheWeatherForecast = get("local_weather_forecast")) as WeatherRepository }
 }
 
 val mUseCaseModules = module {
@@ -46,10 +51,23 @@ val mLocalModules = module {
     single(name = DATABASE) { Room.databaseBuilder(androidApplication(), WeatherDatabase::class.java, "weather").build() }
 }
 
+val mProviders = module {
+    single(name = "UnitProviderImpl") { UnitProviderImpl(androidContext()) }
+}
+
+
 val mViewModels = module {
     viewModel {
-        CurrentWeatherViewModel(getCurrentWeatherCityUseCase = get("GetCurrentWeatherCityUseCase"))
+        CurrentWeatherViewModel(unitProvider = get("UnitProviderImpl"),
+                                getCurrentWeatherCityUseCase = get("GetCurrentWeatherCityUseCase"),
+                                getCurrentWeatherCoordinateUseCase = get("GetCurrentWeatherCoordinateUseCase"))
+
     }
+    viewModel {
+        FutureListWeatherViewModel( unitProvider = get("UnitProviderImpl"),
+                                    getWeatherForecastCityUseCase = get("GetWeatherForecastCityUseCase"))
+    }
+
 }
 
 private const val BASE_URL = "https://api.openweathermap.org"

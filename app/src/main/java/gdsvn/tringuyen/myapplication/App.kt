@@ -1,6 +1,7 @@
 package gdsvn.tringuyen.myapplication
 
 import android.app.Application
+import android.preference.PreferenceManager
 import gdsvn.tringuyen.myapplication.BuildConfig
 import gdsvn.tringuyen.myapplication.presentation.di.*
 import org.koin.android.ext.android.startKoin
@@ -20,10 +21,12 @@ class App : Application() {
         startKoin(this,
                 listOf(mNetworkModules,
                         mViewModels,
+                        mProviders,
                         mRepositoryModules,
                         mUseCaseModules,
                         mLocalModules)
 
         )
+        PreferenceManager.setDefaultValues(this, R.xml.preference, false)
     }
 }
