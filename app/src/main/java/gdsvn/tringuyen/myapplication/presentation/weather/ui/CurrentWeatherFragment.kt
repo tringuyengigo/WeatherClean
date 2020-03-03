@@ -1,10 +1,15 @@
 package gdsvn.tringuyen.myapplication.presentation.weather.ui
 
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.Color.*
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.google.gson.Gson
@@ -63,64 +68,67 @@ class CurrentWeatherFragment : Fragment() {
     }
 
     private fun updateCurrentWeatherUI(data: WeatherDayEntity) {
-
-
-
-        updateTemperatures(data!!.main.temp, data!!.main.feels_like)
-
         (activity as? AppCompatActivity)?.supportActionBar?.title = data!!.name
         (activity as? AppCompatActivity)?.supportActionBar?.subtitle = "Today"
-        textView_condition.text = stringCapitalizeFirstLetter(data.weather[0].description)
+        updateTemperatures(data?.main.temp, data?.main.feels_like)
+        updateDescription(stringCapitalizeFirstLetter(data.weather[0].description))
+
         loadImage(data?.weather[0].main)
     }
 
+    private fun updatePrecipitation(precipitationVolume: Double) {
+        val unitAbbreviation = chooseLocalizedUnitAbbreviation("mm", "in")
+        textView_precipitation.text = "Preciptiation: $precipitationVolume $unitAbbreviation"
+    }
+
+    private fun updateWind(windDirection: String, windSpeed: Double) {
+        val unitAbbreviation = chooseLocalizedUnitAbbreviation("kph", "mph")
+        textView_wind.text = "Wind: $windDirection, $windSpeed $unitAbbreviation"
+    }
+
+    private fun updateVisibility(visibilityDistance: Double) {
+        val unitAbbreviation = chooseLocalizedUnitAbbreviation("km", "mi.")
+        textView_visibility.text = "Visibility: $visibilityDistance $unitAbbreviation"
+    }
+
+    private fun updateDescription(stringCapitalizeFirstLetter: String) {
+        textView_condition.text = stringCapitalizeFirstLetter
+    }
+
     private fun updateTemperatures(temperature: Double, feelsLike: Double) {
-        var temperatureConv = 0
-        var feelsLikeConv = 0
-
+        var temperatureConv = temperature
+        var feelsLikeConv = feelsLike
         val unitAbbreviation = chooseLocalizedUnitAbbreviation("°C", "°F")
-        Timber.e("updateTemperatures $unitAbbreviation")
-
         if(unitAbbreviation == "°C") {
-            temperatureConv = convertFahrenheitToCelsius(temperature).toInt()
-            feelsLikeConv = convertFahrenheitToCelsius(feelsLike).toInt()
+            temperatureConv = convertFahrenheitToCelsius(temperature)
+            feelsLikeConv = convertFahrenheitToCelsius(feelsLike)
         } else {
-            temperatureConv = temperature.toInt()
-            feelsLikeConv = feelsLike.toInt()
+            temperatureConv = temperature
+            feelsLikeConv = feelsLike
         }
-
-        textView_temperature.text = "${temperatureConv}$unitAbbreviation"
-        textView_feels_like_temperature.text = "Feels like $feelsLikeConv$unitAbbreviation"
+        textView_temperature.text = "${Math.round(temperatureConv)}$unitAbbreviation"
+        textView_feels_like_temperature.text = "Feels like ${Math.round(feelsLikeConv)}$unitAbbreviation"
     }
-
-    private fun convertCelsiusToFahrenheit(celcious: Double): Double {
-        return (celcious * 9.0f / 5.0f + 32)
-    }
-
-    private fun convertFahrenheitToCelsius(fahrenheit: Double): Double {
-        return (fahrenheit - 32) *  5.0f / 9.0f
-    }
-
 
     //Should get icon's link to show image
     private fun loadImage(icon: String) {
         var icon : String = icon.toLowerCase()
         if(icon.contains("clear")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_clear_web);
+            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         } else if (icon.contains("rain")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_rain_web);
+            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         } else if (icon.contains("cloud")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_cloudy_web);
+            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         } else if (icon.contains("drizzle")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_drizzle_web);
+            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         } else if (icon.contains("extreme")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_drizzle_web);
+            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         } else if (icon.contains("snow")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_snow_web);
+            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         } else if (icon.contains("thunderstorm")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_thunderstorm_web);
+            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         } else if (icon.contains("atmosphere")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_atmosphere_web);
+            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         }  else {
             imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         }
@@ -143,5 +151,12 @@ class CurrentWeatherFragment : Fragment() {
         return if (weatherViewModel.isMetricUnit) metric else imperial
     }
 
+    private fun convertCelsiusToFahrenheit(celcious: Double): Double {
+        return (celcious * 9.0f / 5.0f + 32)
+    }
+
+    private fun convertFahrenheitToCelsius(fahrenheit: Double): Double {
+        return (fahrenheit - 32) *  5.0f / 9.0f
+    }
 
 }
