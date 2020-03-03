@@ -1,8 +1,9 @@
 package gdsvn.tringuyen.myapplication.presentation.di
 
 import androidx.room.Room
-import gdsvn.tringuyen.myapplication.data.api.RemoteApiWeather
+import gdsvn.tringuyen.myapplication.data.api.ApiWeather
 import gdsvn.tringuyen.myapplication.data.database.WeatherDatabase
+import gdsvn.tringuyen.myapplication.data.provider.location.LocationProviderImpl
 import gdsvn.tringuyen.myapplication.data.responsitory.WeatherCurrentCacheImpl
 import gdsvn.tringuyen.myapplication.data.responsitory.WeatherForecastCacheImpl
 import gdsvn.tringuyen.myapplication.data.responsitory.WeatherRemoteImpl
@@ -13,9 +14,10 @@ import gdsvn.tringuyen.myapplication.domain.usecase.GetCurrentWeatherCoordinateU
 import gdsvn.tringuyen.myapplication.domain.usecase.GetWeatherForecastCityUseCase
 import gdsvn.tringuyen.myapplication.domain.usecase.GetWeatherForecastCoordinateUseCase
 import gdsvn.tringuyen.myapplication.presentation.common.AsyncFlowableTransformer
-import gdsvn.tringuyen.myapplication.presentation.common.provider.UnitProviderImpl
+import gdsvn.tringuyen.myapplication.data.provider.units.UnitProviderImpl
 import gdsvn.tringuyen.myapplication.presentation.weather.viewmodel.CurrentWeatherViewModel
 import gdsvn.tringuyen.myapplication.presentation.weather.viewmodel.FutureListWeatherViewModel
+import gdsvn.tringuyen.myapplication.presentation.weather.viewmodel.LocationViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module.module
@@ -44,7 +46,7 @@ val mUseCaseModules = module {
 
 val mNetworkModules = module {
     single(name = RETROFIT_INSTANCE) { createNetworkClient(BASE_URL) }
-    single(name = API) { (get(RETROFIT_INSTANCE) as Retrofit).create(RemoteApiWeather::class.java) }
+    single(name = API) { (get(RETROFIT_INSTANCE) as Retrofit).create(ApiWeather::class.java) }
 }
 
 val mLocalModules = module {
@@ -52,20 +54,35 @@ val mLocalModules = module {
 }
 
 val mProviders = module {
-    single(name = "UnitProviderImpl") { UnitProviderImpl(androidContext()) }
+    single(name = "UnitProviderImpl") {
+        UnitProviderImpl(
+            androidContext()
+        )
+    }
+    single(name = "LocationProviderImpl") {
+        LocationProviderImpl(androidContext())
+    }
+
+
 }
 
 
 val mViewModels = module {
     viewModel {
         CurrentWeatherViewModel(unitProvider = get("UnitProviderImpl"),
+                                locationProvider = get("LocationProviderImpl"),
                                 getCurrentWeatherCityUseCase = get("GetCurrentWeatherCityUseCase"),
-                                getCurrentWeatherCoordinateUseCase = get("GetCurrentWeatherCoordinateUseCase"))
+                                getCurrentWeatherCoordinateUseCase = get("GetCurrentWeatherCoordinateUseCase"),
+                                locationViewModel = get("LocationViewModel"))
 
     }
     viewModel {
         FutureListWeatherViewModel( unitProvider = get("UnitProviderImpl"),
                                     getWeatherForecastCityUseCase = get("GetWeatherForecastCityUseCase"))
+    }
+
+    viewModel(name = "LocationViewModel") {
+        LocationViewModel(androidApplication())
     }
 
 }

@@ -5,7 +5,6 @@ import gdsvn.tringuyen.myapplication.data.entity.WeatherDayEntity
 import gdsvn.tringuyen.myapplication.data.entity.WeatherForecastEntity
 import gdsvn.tringuyen.myapplication.domain.common.BaseFlowableUseCase
 import gdsvn.tringuyen.myapplication.domain.common.FlowableRxTransformer
-import gdsvn.tringuyen.myapplication.domain.entity.WeatherDay
 import gdsvn.tringuyen.myapplication.domain.respository.WeatherRepository
 
 import io.reactivex.Flowable

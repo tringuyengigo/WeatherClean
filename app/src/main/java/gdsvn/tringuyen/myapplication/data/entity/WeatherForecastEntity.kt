@@ -11,6 +11,7 @@ class WeatherForecastEntity (
     @ColumnInfo(name = "id")
     var id: Int = 0,
     @ColumnInfo(name = "weather_forecast")
+    @SerializedName("list")
     val weather_forecast: List<WeatherDayEntity>
 )
 

@@ -66,7 +66,6 @@ class MainActivity : AppCompatActivity() {
     ) {
         if (requestCode == MY_PERMISSION_ACCESS_COARSE_LOCATION) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-//                bindLocationManager()
             else
                 Toast.makeText(this, "Please, set location manually in settings", Toast.LENGTH_LONG).show()
         }

@@ -3,7 +3,6 @@ package gdsvn.tringuyen.myapplication.data.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-import gdsvn.tringuyen.myapplication.domain.entity.WeatherDay
 
 @Entity(tableName = "weather_day")
 data class WeatherDayEntity(

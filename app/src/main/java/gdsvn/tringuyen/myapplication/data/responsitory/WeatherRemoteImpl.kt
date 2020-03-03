@@ -1,12 +1,12 @@
 package gdsvn.tringuyen.myapplication.data.responsitory
 
 
-import gdsvn.tringuyen.myapplication.data.api.RemoteApiWeather
+import gdsvn.tringuyen.myapplication.data.api.ApiWeather
 import gdsvn.tringuyen.myapplication.data.entity.WeatherDayEntity
 import gdsvn.tringuyen.myapplication.data.entity.WeatherForecastEntity
 import io.reactivex.Flowable
 
-class WeatherRemoteImpl constructor(private val api: RemoteApiWeather) {
+class WeatherRemoteImpl constructor(private val api: ApiWeather) {
 
     fun getCurrentWeatherByCity(city: String): Flowable<WeatherDayEntity> {
         return api.getCurrentWeatherByCity(city = city)

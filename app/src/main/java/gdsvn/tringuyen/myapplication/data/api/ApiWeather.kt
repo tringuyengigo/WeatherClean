@@ -6,7 +6,7 @@ import io.reactivex.Flowable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface RemoteApiWeather {
+interface ApiWeather {
 
     @GET("/data/2.5/weather")
     fun getCurrentWeatherByCity(@Query("q") city: String) : Flowable<WeatherDayEntity>
