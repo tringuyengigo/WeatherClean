@@ -7,13 +7,13 @@ app:startDestination="@id/currentWeatherFragment">
 
 <fragment
     android:id="@+id/currentWeatherFragment"
-    android:name="gdsvn.tringuyen.myapplication.presentation.weather.ui.CurrentWeatherFragment"
-    android:label="current_weather_fragment"
+    android:name="gdsvn.tringuyen.myapplication.presentation.weather.ui.current.CurrentWeatherFragment"
+    android:label="Name of city"
     tools:layout="@layout/current_weather_fragment" />
 <fragment
     android:id="@+id/futureListWeatherFragment"
-    android:name="gdsvn.tringuyen.myapplication.presentation.weather.ui.FutureListWeatherFragment"
-    android:label="future_list_weather_fragment"
+    android:name="gdsvn.tringuyen.myapplication.presentation.weather.ui.future.list.FutureListWeatherFragment"
+    android:label="Name of city"
     tools:layout="@layout/future_list_weather_fragment" >
     <action
         android:id="@+id/actionDetail"
@@ -21,8 +21,8 @@ app:startDestination="@id/currentWeatherFragment">
 </fragment>
 <fragment
     android:id="@+id/futureDetailWeatherFragment"
-    android:name="gdsvn.tringuyen.myapplication.presentation.weather.ui.FutureDetailWeatherFragment"
-    android:label="future_detail_weather_fragment"
+    android:name="gdsvn.tringuyen.myapplication.presentation.weather.ui.future.detail.FutureDetailWeatherFragment"
+    android:label="Name of city"
     tools:layout="@layout/future_detail_weather_fragment" >
     <argument
         android:name="dateString"
@@ -30,7 +30,7 @@ app:startDestination="@id/currentWeatherFragment">
 </fragment>
 <fragment
     android:id="@+id/settingsFragment"
-    android:name="gdsvn.tringuyen.myapplication.presentation.weather.ui.SettingFragment"
-    android:label="SettingsFragment"
+    android:name="gdsvn.tringuyen.myapplication.presentation.weather.ui.setting.SettingFragment"
+    android:label="Settings"
     />
 </navigation>

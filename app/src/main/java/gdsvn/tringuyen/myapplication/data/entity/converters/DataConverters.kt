@@ -24,6 +24,18 @@ class DataConverters {
     fun coordStringToCoord(value: String): Coord = Gson().fromJson(value, Coord::class.java)
 
     @TypeConverter
+    fun coordCityDataToString(data: CoordCity): String = Gson().toJson(data)
+
+    @TypeConverter
+    fun coordCityStringToCoordCity(value: String): CoordCity = Gson().fromJson(value, CoordCity::class.java)
+
+    @TypeConverter
+    fun cityDataToString(data: City): String = Gson().toJson(data)
+
+    @TypeConverter
+    fun cityStringToCity(value: String): City = Gson().fromJson(value, City::class.java)
+
+    @TypeConverter
     fun mainDataToString(data: Main): String = Gson().toJson(data)
 
     @TypeConverter

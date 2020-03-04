@@ -1,4 +1,4 @@
-package gdsvn.tringuyen.myapplication.presentation.weather.ui
+package gdsvn.tringuyen.myapplication.presentation.weather.ui.main
 
 import android.Manifest
 import android.content.pm.PackageManager

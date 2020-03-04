@@ -26,7 +26,7 @@ class LocationLiveData(context: Context) : LiveData<LocationModel>() {
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
                 location?.also {
-                    Timber.e("Location --> ${location}")
+                    Timber.e("Location --> $it")
                     setLocationData(it)
                 }
             }
@@ -35,6 +35,7 @@ class LocationLiveData(context: Context) : LiveData<LocationModel>() {
 
     @SuppressLint("MissingPermission")
     private fun startLocationUpdates() {
+        Timber.e("startLocationUpdates()")
         fusedLocationClient.requestLocationUpdates(
             locationRequest,
             locationCallback,
@@ -52,6 +53,7 @@ class LocationLiveData(context: Context) : LiveData<LocationModel>() {
     }
 
     private fun setLocationData(location: Location) {
+
         value = LocationModel(
             longitude = location.longitude,
             latitude = location.latitude

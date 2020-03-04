@@ -18,7 +18,7 @@ interface ApiWeather {
     @GET("/data/2.5/forecast")
     fun getWeatherForecastByCity(@Query("q") city: String): Flowable<WeatherForecastEntity>
 
-    @GET("/forecast")
+    @GET("/data/2.5/forecast")
     fun getWeatherForecastByCoordinate(@Query("lat") lat: String,
                                        @Query("lon") lon: String): Flowable<WeatherForecastEntity>
 }

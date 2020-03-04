@@ -15,9 +15,10 @@ import gdsvn.tringuyen.myapplication.domain.usecase.GetWeatherForecastCityUseCas
 import gdsvn.tringuyen.myapplication.domain.usecase.GetWeatherForecastCoordinateUseCase
 import gdsvn.tringuyen.myapplication.presentation.common.AsyncFlowableTransformer
 import gdsvn.tringuyen.myapplication.data.provider.units.UnitProviderImpl
-import gdsvn.tringuyen.myapplication.presentation.weather.viewmodel.CurrentWeatherViewModel
-import gdsvn.tringuyen.myapplication.presentation.weather.viewmodel.FutureListWeatherViewModel
-import gdsvn.tringuyen.myapplication.presentation.weather.viewmodel.LocationViewModel
+import gdsvn.tringuyen.myapplication.presentation.weather.viewmodel.current.CurrentWeatherViewModel
+import gdsvn.tringuyen.myapplication.presentation.weather.viewmodel.future.FutureListWeatherViewModel
+import gdsvn.tringuyen.myapplication.presentation.weather.viewmodel.future.sharedata.SharedViewModel
+import gdsvn.tringuyen.myapplication.presentation.weather.viewmodel.location.LocationViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module.module
@@ -69,22 +70,29 @@ val mProviders = module {
 
 val mViewModels = module {
     viewModel {
-        CurrentWeatherViewModel(unitProvider = get("UnitProviderImpl"),
-                                locationProvider = get("LocationProviderImpl"),
-                                getCurrentWeatherCityUseCase = get("GetCurrentWeatherCityUseCase"),
-                                getCurrentWeatherCoordinateUseCase = get("GetCurrentWeatherCoordinateUseCase"),
-                                locationViewModel = get("LocationViewModel"))
+        CurrentWeatherViewModel(
+            unitProvider = get("UnitProviderImpl"),
+            locationProvider = get("LocationProviderImpl"),
+            getCurrentWeatherCityUseCase = get("GetCurrentWeatherCityUseCase"),
+            getCurrentWeatherCoordinateUseCase = get("GetCurrentWeatherCoordinateUseCase"),
+            locationViewModel = get("LocationViewModel")
+        )
 
     }
     viewModel {
-        FutureListWeatherViewModel( unitProvider = get("UnitProviderImpl"),
-                                    getWeatherForecastCityUseCase = get("GetWeatherForecastCityUseCase"))
+        FutureListWeatherViewModel(
+            unitProvider = get("UnitProviderImpl"),
+            locationProvider = get("LocationProviderImpl"),
+            getWeatherForecastCityUseCase = get("GetWeatherForecastCityUseCase"),
+            getWeatherForecastCoordinateUseCase = get("GetWeatherForecastCoordinateUseCase"),
+            locationViewModel = get("LocationViewModel")
+        )
     }
-
     viewModel(name = "LocationViewModel") {
-        LocationViewModel(androidApplication())
+        LocationViewModel(
+            androidApplication()
+        )
     }
-
 }
 
 private const val BASE_URL = "https://api.openweathermap.org"

@@ -12,6 +12,10 @@ class WeatherForecastEntity (
     var id: Int = 0,
     @ColumnInfo(name = "weather_forecast")
     @SerializedName("list")
-    val weather_forecast: List<WeatherDayEntity>
+    val weather_forecast: List<WeatherDayEntity>,
+    @ColumnInfo(name = "city")
+    @SerializedName("city")
+    val city: City
+
 )
 

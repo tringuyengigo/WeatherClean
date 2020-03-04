@@ -10,7 +10,7 @@ interface WeatherRepository {
     fun getCurrentWeatherCoordinates(lon: String, lat: String): Flowable<WeatherDayEntity>
 
     fun getWeatherForecastCity(city: String): Flowable<WeatherForecastEntity>
-    fun getWeatherForecastCoordinates(lon: String, lat: String): Flowable<List<WeatherDayEntity>>
+    fun getWeatherForecastCoordinates(lon: String, lat: String): Flowable<WeatherForecastEntity>
 
 }
 

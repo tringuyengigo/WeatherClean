@@ -1,4 +1,4 @@
-package gdsvn.tringuyen.myapplication.presentation.weather.viewmodel
+package gdsvn.tringuyen.myapplication.presentation.weather.viewmodel.future
 
 import androidx.lifecycle.ViewModel
 

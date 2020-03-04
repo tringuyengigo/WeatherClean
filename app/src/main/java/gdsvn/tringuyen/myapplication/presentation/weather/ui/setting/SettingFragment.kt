@@ -1,4 +1,4 @@
-package gdsvn.tringuyen.myapplication.presentation.weather.ui
+package gdsvn.tringuyen.myapplication.presentation.weather.ui.setting
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

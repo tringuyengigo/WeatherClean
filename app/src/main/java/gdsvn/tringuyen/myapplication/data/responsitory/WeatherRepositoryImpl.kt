@@ -30,17 +30,14 @@ class WeatherRepositoryImpl(private val remote: WeatherRemoteImpl,
     }
 
     override fun getWeatherForecastCity(city: String): Flowable<WeatherForecastEntity> {
-       return remote.getWeatherForecastByCity(city).map {
-           Timber.e("getWeatherForecastCity ${it.weather_forecast}")
-           it
-       }
+       return remote.getWeatherForecastByCity(city = city).map { it }
     }
 
     override fun getWeatherForecastCoordinates(
         lon: String,
         lat: String
-    ): Flowable<List<WeatherDayEntity>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    ): Flowable<WeatherForecastEntity> {
+        return remote.getWeatherForecastByCoordinate(lon = lon, lat = lat).map { it }
     }
 
 

@@ -51,6 +51,7 @@ dependencies {
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+
     //Add Navigation
     implementation "android.arch.navigation:navigation-fragment:$navigation_version"
     implementation "android.arch.navigation:navigation-ui:$navigation_version"
@@ -97,6 +98,5 @@ dependencies {
     // Kotlin Android Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.2"
-
 
 }

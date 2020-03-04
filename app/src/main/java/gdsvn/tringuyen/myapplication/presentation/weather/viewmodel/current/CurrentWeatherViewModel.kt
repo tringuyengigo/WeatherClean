@@ -1,6 +1,5 @@
-package gdsvn.tringuyen.myapplication.presentation.weather.viewmodel
+package gdsvn.tringuyen.myapplication.presentation.weather.viewmodel.current
 
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import gdsvn.tringuyen.myapplication.data.entity.WeatherDayEntity
 import gdsvn.tringuyen.myapplication.data.provider.location.LocationProviderImpl
@@ -11,6 +10,7 @@ import gdsvn.tringuyen.myapplication.presentation.common.Data
 import gdsvn.tringuyen.myapplication.presentation.common.Status
 import gdsvn.tringuyen.myapplication.data.provider.units.UnitProviderImpl
 import gdsvn.tringuyen.myapplication.data.provider.units.UnitSystem
+import gdsvn.tringuyen.myapplication.presentation.weather.viewmodel.location.LocationViewModel
 import timber.log.Timber
 
 class CurrentWeatherViewModel(
@@ -36,7 +36,6 @@ class CurrentWeatherViewModel(
     }
 
     private fun fetchWeatherCity(city: String) {
-
         val disposable = getCurrentWeatherCityUseCase.getWeatherByCity(city = city)
                 .subscribe({ response ->
                     mWeather.value = Data(responseType = Status.SUCCESSFUL, data = response)
@@ -50,7 +49,6 @@ class CurrentWeatherViewModel(
     }
 
     private fun fetchWeatherCoordinate(lon: String, lat: String) {
-
         val disposable = getCurrentWeatherCoordinateUseCase.getWeatherByCoordinate(lon = lon, lat = lat)
             .subscribe({ response ->
                 mWeather.value = Data(responseType = Status.SUCCESSFUL, data = response)
