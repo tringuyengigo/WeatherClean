@@ -110,21 +110,21 @@ class WeatherListAdapter(metricUnit: Boolean) : RecyclerView.Adapter<WeatherList
         private fun loadImage(view: View, icon: String) {
             var icon : String = icon.toLowerCase()
             if(icon.contains("clear")) {
-                view.imageView_condition_icon.setImageResource(R.drawable.ic_clear_web)
+                view.imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny)
             } else if (icon.contains("rain")) {
-                view.imageView_condition_icon.setImageResource(R.drawable.ic_rain_web)
+                view.imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny)
             } else if (icon.contains("cloud")) {
-                view.imageView_condition_icon.setImageResource(R.drawable.ic_cloudy_web)
+                view.imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny)
             } else if (icon.contains("drizzle")) {
-                view.imageView_condition_icon.setImageResource(R.drawable.ic_drizzle_web)
+                view.imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny)
             } else if (icon.contains("extreme")) {
-                view.imageView_condition_icon.setImageResource(R.drawable.ic_drizzle_web)
+                view.imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny)
             } else if (icon.contains("snow")) {
-                view.imageView_condition_icon.setImageResource(R.drawable.ic_snow_web)
+                view.imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny)
             } else if (icon.contains("thunderstorm")) {
-                view.imageView_condition_icon.setImageResource(R.drawable.ic_thunderstorm_web)
+                view.imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny)
             } else if (icon.contains("atmosphere")) {
-                view.imageView_condition_icon.setImageResource(R.drawable.ic_atmosphere_web)
+                view.imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny)
             }  else {
                 view.imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny)
             }

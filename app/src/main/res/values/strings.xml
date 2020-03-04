@@ -9,7 +9,13 @@
     <string name="location">Location</string>
     <string name="units">Units</string>
 
+    <string name="current_weather">Current Weather</string>
+    <string name="notify_current_weather">You can access current weather data for any location.</string>
 
+    <string name="forcast_weather">Weather Forecast</string>
+    <string name="notify_forcast_weather">You can search next 5 day weather forecast data for any location.</string>
+
+    <string name="notify_setting">You can set weather data access by location or real time device location.</string>
 
 </resources>
 

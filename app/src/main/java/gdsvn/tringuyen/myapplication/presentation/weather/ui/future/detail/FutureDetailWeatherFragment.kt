@@ -139,21 +139,21 @@ class FutureDetailWeatherFragment : Fragment() {
     private fun loadImage(icon: String) {
         var icon : String = icon.toLowerCase()
         if(icon.contains("clear")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_clear_web);
+            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         } else if (icon.contains("rain")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_rain_web);
+            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         } else if (icon.contains("cloud")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_cloudy_web);
+            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         } else if (icon.contains("drizzle")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_drizzle_web);
+            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         } else if (icon.contains("extreme")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_drizzle_web);
+            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         } else if (icon.contains("snow")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_snow_web);
+            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         } else if (icon.contains("thunderstorm")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_thunderstorm_web);
+            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         } else if (icon.contains("atmosphere")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_atmosphere_web);
+            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         }  else {
             imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         }

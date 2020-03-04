@@ -7,6 +7,7 @@ import android.view.GestureDetector.OnDoubleTapListener
 import android.view.GestureDetector.SimpleOnGestureListener
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import com.google.gson.Gson
 import gdsvn.tringuyen.myapplication.R
@@ -16,6 +17,7 @@ import gdsvn.tringuyen.myapplication.presentation.weather.viewmodel.current.Curr
 import kotlinx.android.synthetic.main.current_weather_fragment.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.roundToInt
@@ -23,12 +25,22 @@ import kotlin.math.roundToInt
 
 class CurrentWeatherFragment : Fragment()  {
 
+    private val weatherViewModel: CurrentWeatherViewModel by viewModel()
+
+    private var gestureDetector: GestureDetector? = null
+
+    private val MENU_CURRENT: Int = 0
+
+    private val MENU_WEEK: Int = 1
+
+    private val MENU_SETTING: Int = 3
+
+
     companion object {
         fun newInstance() = CurrentWeatherFragment()
     }
 
-    private val weatherViewModel: CurrentWeatherViewModel by viewModel()
-    var gestureDetector: GestureDetector? = null
+
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
@@ -67,11 +79,13 @@ class CurrentWeatherFragment : Fragment()  {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        weatherViewModel.fetchWeather()
+        group_loading.visibility = View.GONE
+        (activity as? AppCompatActivity)?.supportActionBar?.title = this!!.getString(R.string.app_name)
     }
 
     override fun onStart() {
         super.onStart()
+        weatherViewModel.fetchWeather()
         weatherViewModel.getWeatherLiveData().observe(this, Observer { data ->
             when (data?.responseType) {
                 Status.ERROR -> {
@@ -168,25 +182,49 @@ class CurrentWeatherFragment : Fragment()  {
     private fun loadImage(icon: String) {
         var icon : String = icon.toLowerCase()
         if(icon.contains("clear")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_clear_web);
+            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         } else if (icon.contains("rain")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_rain_web);
+            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         } else if (icon.contains("cloud")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_cloudy_web);
+            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         } else if (icon.contains("drizzle")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_drizzle_web);
+            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         } else if (icon.contains("extreme")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_drizzle_web);
+            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         } else if (icon.contains("snow")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_snow_web);
+            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         } else if (icon.contains("thunderstorm")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_thunderstorm_web);
+            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         } else if (icon.contains("atmosphere")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_atmosphere_web);
+            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         }  else {
             imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         }
     }
+
+//    //Should get icon's link to show image
+//    private fun loadImage(icon: String) {
+//        var icon : String = icon.toLowerCase()
+//        if(icon.contains("clear")) {
+//            imageView_condition_icon.setImageResource(R.drawable.ic_clear_web);
+//        } else if (icon.contains("rain")) {
+//            imageView_condition_icon.setImageResource(R.drawable.ic_rain_web);
+//        } else if (icon.contains("cloud")) {
+//            imageView_condition_icon.setImageResource(R.drawable.ic_cloudy_web);
+//        } else if (icon.contains("drizzle")) {
+//            imageView_condition_icon.setImageResource(R.drawable.ic_drizzle_web);
+//        } else if (icon.contains("extreme")) {
+//            imageView_condition_icon.setImageResource(R.drawable.ic_drizzle_web);
+//        } else if (icon.contains("snow")) {
+//            imageView_condition_icon.setImageResource(R.drawable.ic_snow_web);
+//        } else if (icon.contains("thunderstorm")) {
+//            imageView_condition_icon.setImageResource(R.drawable.ic_thunderstorm_web);
+//        } else if (icon.contains("atmosphere")) {
+//            imageView_condition_icon.setImageResource(R.drawable.ic_atmosphere_web);
+//        }  else {
+//            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
+//        }
+//    }
 
     //Should create Tool Class for this function
     private fun stringCapitalizeFirstLetter(str: String) : String {
@@ -234,5 +272,6 @@ class CurrentWeatherFragment : Fragment()  {
             return true
         }
     }
+
 }
 
