@@ -20,11 +20,12 @@ class App : Application() {
 
     private fun loadKoin() {
         startKoin(this,
-                listOf(mNetworkModules,
+                listOf( mNetworkModules,
                         mViewModels,
                         mProviders,
                         mRepositoryModules,
                         mUseCaseModules,
+                        mSharePreference,
                         mLocalModules)
 
         )

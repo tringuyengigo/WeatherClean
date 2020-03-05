@@ -1,16 +1,26 @@
 package gdsvn.tringuyen.myapplication.presentation.weather.ui.greeting
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.NavHostFragment
 import gdsvn.tringuyen.myapplication.R
+import gdsvn.tringuyen.myapplication.data.provider.units.SharedPreference
+import gdsvn.tringuyen.myapplication.data.provider.units.UnitProviderImpl
+import gdsvn.tringuyen.myapplication.presentation.di.mSharePreference
+import gdsvn.tringuyen.myapplication.presentation.weather.viewmodel.current.CurrentWeatherViewModel
 import kotlinx.android.synthetic.main.fragment_greeting.*
+import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,9 +41,12 @@ private const val DOUBLE_TAP: Int = 3
  * create an instance of this fragment.
  */
 class GreetingFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
     private var param1: String? = null
+
     private var param2: String? = null
+
+    private val sharedPreferences: SharedPreference by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,10 +61,17 @@ class GreetingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         this.imageView_condition_icon.setImageResource(R.drawable.ic_launcher_web)
 
-        addMaterialTapTarget( activity = this.activity,
-            stringTitle = this!!.getString(R.string.current_weather),
-            stringNotify = this!!.getString(R.string.notify_current_weather),
-            indexDefine = MENU_CURRENT)
+        if(sharedPreferences.getValueBoolien("IS_SHOW", true)) {
+            addMaterialTapTarget( activity = this.activity,
+                stringTitle = this!!.getString(R.string.current_weather),
+                stringNotify = this!!.getString(R.string.notify_current_weather),
+                indexDefine = MENU_CURRENT)
+        } else {
+            Handler().postDelayed({
+                NavHostFragment.findNavController(this).navigate(R.id.action_greetingFragment_to_currentWeatherFragment)
+            }, 500)
+
+        }
     }
 
     override fun onCreateView(
@@ -95,6 +115,7 @@ class GreetingFragment : Fragment() {
                         .setCaptureTouchEventOnFocal(true)
                         .setPromptStateChangeListener(MaterialTapTargetPrompt.PromptStateChangeListener { _: MaterialTapTargetPrompt?, state: Int ->
                             if (state == MaterialTapTargetPrompt.STATE_DISMISSING || state == MaterialTapTargetPrompt.STATE_FINISHED) {
+                                sharedPreferences.save("IS_SHOW", false)
                                 addMaterialTapTarget( activity = this.activity,
                                     stringTitle = this!!.getString(R.string.forcast_weather),
                                     stringNotify = this!!.getString(R.string.notify_forcast_weather),

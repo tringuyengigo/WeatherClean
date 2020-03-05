@@ -4,6 +4,7 @@ import androidx.room.Room
 import gdsvn.tringuyen.myapplication.data.api.ApiWeather
 import gdsvn.tringuyen.myapplication.data.database.WeatherDatabase
 import gdsvn.tringuyen.myapplication.data.provider.location.LocationProviderImpl
+import gdsvn.tringuyen.myapplication.data.provider.units.SharedPreference
 import gdsvn.tringuyen.myapplication.data.responsitory.WeatherCurrentCacheImpl
 import gdsvn.tringuyen.myapplication.data.responsitory.WeatherForecastCacheImpl
 import gdsvn.tringuyen.myapplication.data.responsitory.WeatherRemoteImpl
@@ -54,19 +55,18 @@ val mLocalModules = module {
     single(name = DATABASE) { Room.databaseBuilder(androidApplication(), WeatherDatabase::class.java, "weather").build() }
 }
 
+val mSharePreference = module {
+    single(name = "SharedPreference") { SharedPreference(androidContext()) }
+}
+
 val mProviders = module {
     single(name = "UnitProviderImpl") {
-        UnitProviderImpl(
-            androidContext()
-        )
+        UnitProviderImpl(androidContext())
     }
     single(name = "LocationProviderImpl") {
         LocationProviderImpl(androidContext())
     }
-
-
 }
-
 
 val mViewModels = module {
     viewModel {
