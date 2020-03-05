@@ -13,7 +13,17 @@ import gdsvn.tringuyen.myapplication.R
 import gdsvn.tringuyen.myapplication.data.entity.WeatherDayEntity
 import gdsvn.tringuyen.myapplication.presentation.weather.viewmodel.future.FutureDetailWeatherViewModel
 import gdsvn.tringuyen.myapplication.presentation.weather.viewmodel.future.sharedata.SharedViewModel
+import kotlinx.android.synthetic.main.current_weather_fragment.*
 import kotlinx.android.synthetic.main.future_detail_weather_fragment.*
+import kotlinx.android.synthetic.main.future_detail_weather_fragment.imageView_condition_icon
+import kotlinx.android.synthetic.main.future_detail_weather_fragment.textView_condition
+import kotlinx.android.synthetic.main.future_detail_weather_fragment.textView_humidity
+import kotlinx.android.synthetic.main.future_detail_weather_fragment.textView_pressure
+import kotlinx.android.synthetic.main.future_detail_weather_fragment.textView_sunrise
+import kotlinx.android.synthetic.main.future_detail_weather_fragment.textView_sunset
+import kotlinx.android.synthetic.main.future_detail_weather_fragment.textView_temperature
+import kotlinx.android.synthetic.main.future_detail_weather_fragment.textView_visibility
+import kotlinx.android.synthetic.main.future_detail_weather_fragment.textView_wind
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.text.SimpleDateFormat
@@ -130,30 +140,29 @@ class FutureDetailWeatherFragment : Fragment() {
         if(unitAbbreviation == "km")  {
             textView_visibility.text = "Visibility: ${convertMilToKm(visibilityDistance)} $unitAbbreviation"
         } else {
-            textView_visibility.text = "Visibility: ${visibilityDistance} $unitAbbreviation"
+            textView_visibility.text = "Visibility: $visibilityDistance $unitAbbreviation"
         }
     }
-
 
     //Should get icon's link to show image
     private fun loadImage(icon: String) {
         var icon : String = icon.toLowerCase()
         if(icon.contains("clear")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
+            imageView_condition_icon.setImageResource(R.drawable.ic_clear_web);
         } else if (icon.contains("rain")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
+            imageView_condition_icon.setImageResource(R.drawable.ic_rain_web);
         } else if (icon.contains("cloud")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
+            imageView_condition_icon.setImageResource(R.drawable.ic_cloudy_web);
         } else if (icon.contains("drizzle")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
+            imageView_condition_icon.setImageResource(R.drawable.ic_drizzle_web);
         } else if (icon.contains("extreme")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
+            imageView_condition_icon.setImageResource(R.drawable.ic_drizzle_web);
         } else if (icon.contains("snow")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
+            imageView_condition_icon.setImageResource(R.drawable.ic_snow_web);
         } else if (icon.contains("thunderstorm")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
+            imageView_condition_icon.setImageResource(R.drawable.ic_thunderstorm_web);
         } else if (icon.contains("atmosphere")) {
-            imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
+            imageView_condition_icon.setImageResource(R.drawable.ic_atmosphere_web);
         }  else {
             imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
         }

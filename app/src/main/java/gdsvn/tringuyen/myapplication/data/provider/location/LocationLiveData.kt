@@ -19,6 +19,10 @@ class LocationLiveData(context: Context) : LiveData<LocationModel>() {
         fusedLocationClient.removeLocationUpdates(locationCallback)
     }
 
+    fun stopLocationLiveData() {
+        fusedLocationClient.removeLocationUpdates(locationCallback)
+    }
+
 
     @SuppressLint("MissingPermission")
     override fun onActive() {
@@ -53,7 +57,6 @@ class LocationLiveData(context: Context) : LiveData<LocationModel>() {
     }
 
     private fun setLocationData(location: Location) {
-
         value = LocationModel(
             longitude = location.longitude,
             latitude = location.latitude

@@ -36,4 +36,5 @@
     <color name="text_light">#ffffff</color>
     <color name="text_dark">#000000</color>
     <color name="tab_indicator">#ffffff</color>
+    <color name="black_overlay">#66000000</color>
 </resources>

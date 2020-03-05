@@ -15,4 +15,10 @@ class LocationViewModel(application: Application) : BaseViewModel() {
         Timber.e("getLocationData() -- ${locationData.value}")
         return locationData
     }
+
+    fun stopLocationData() {
+        locationData.stopLocationLiveData()
+    }
+
+
 }

@@ -110,25 +110,26 @@ class WeatherListAdapter(metricUnit: Boolean) : RecyclerView.Adapter<WeatherList
         private fun loadImage(view: View, icon: String) {
             var icon : String = icon.toLowerCase()
             if(icon.contains("clear")) {
-                view.imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny)
+                view.imageView_condition_icon.setImageResource(R.drawable.ic_clear_web);
             } else if (icon.contains("rain")) {
-                view.imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny)
+                view.imageView_condition_icon.setImageResource(R.drawable.ic_rain_web);
             } else if (icon.contains("cloud")) {
-                view.imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny)
+                view.imageView_condition_icon.setImageResource(R.drawable.ic_cloudy_web);
             } else if (icon.contains("drizzle")) {
-                view.imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny)
+                view.imageView_condition_icon.setImageResource(R.drawable.ic_drizzle_web);
             } else if (icon.contains("extreme")) {
-                view.imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny)
+                view.imageView_condition_icon.setImageResource(R.drawable.ic_drizzle_web);
             } else if (icon.contains("snow")) {
-                view.imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny)
+                view.imageView_condition_icon.setImageResource(R.drawable.ic_snow_web);
             } else if (icon.contains("thunderstorm")) {
-                view.imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny)
+                view.imageView_condition_icon.setImageResource(R.drawable.ic_thunderstorm_web);
             } else if (icon.contains("atmosphere")) {
-                view.imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny)
+                view.imageView_condition_icon.setImageResource(R.drawable.ic_atmosphere_web);
             }  else {
-                view.imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny)
+                view.imageView_condition_icon.setImageResource(R.drawable.ic_weather_sunny);
             }
         }
+
 
         private fun chooseLocalizedUnitAbbreviation(metric: String, imperial: String): String {
             return if (this.metricUnit!!) metric else imperial

@@ -120,7 +120,6 @@ class FutureListWeatherFragment : Fragment(), ItemClickListener {
     private fun showWeatherDetail(dataOfRow: WeatherDayEntity, view: View?) {
         shareDataVM.updateData(dataOfRow)
         shareDataVM.updateMetricUnit(futureListWeatherViewModel.isMetricUnit)
-
         NavHostFragment.findNavController(this).navigate(R.id.actionDetail)
     }
 

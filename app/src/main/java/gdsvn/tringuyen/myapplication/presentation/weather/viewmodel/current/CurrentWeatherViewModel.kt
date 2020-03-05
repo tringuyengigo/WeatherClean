@@ -1,7 +1,10 @@
 package gdsvn.tringuyen.myapplication.presentation.weather.viewmodel.current
 
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import gdsvn.tringuyen.myapplication.data.entity.WeatherDayEntity
+import gdsvn.tringuyen.myapplication.data.provider.location.LocationModel
 import gdsvn.tringuyen.myapplication.data.provider.location.LocationProviderImpl
 import gdsvn.tringuyen.myapplication.domain.usecase.GetCurrentWeatherCityUseCase
 import gdsvn.tringuyen.myapplication.domain.usecase.GetCurrentWeatherCoordinateUseCase
@@ -22,9 +25,12 @@ class CurrentWeatherViewModel(
 ) : BaseViewModel() {
 
     private var mWeather = MutableLiveData<Data<WeatherDayEntity>>()
+
     private val unitSystem = unitProvider.getUnitSystem()
+
     fun getWeatherLiveData() = mWeather
 
+    val isMetricUnit: Boolean get() = unitSystem == UnitSystem.METRIC
 
     fun fetchWeather(){
         Timber.d("On fetchWeather()")
@@ -56,6 +62,7 @@ class CurrentWeatherViewModel(
                 mWeather.value = Data(responseType = Status.ERROR, error = Error(error.message))
             }, {
                 Timber.d("On fetchWeatherCoordinate() Complete Called")
+                locationViewModel.stopLocationData()
                 this.onCleared()
             })
         addDisposable(disposable)
@@ -67,12 +74,5 @@ class CurrentWeatherViewModel(
             fetchWeatherCoordinate(lon = it.longitude.toString(), lat = it.latitude.toString())
         }
     }
-
-    val isMetricUnit: Boolean get() = unitSystem == UnitSystem.METRIC
-
-
-
-
-
 
 }
